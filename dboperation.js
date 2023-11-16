@@ -2,12 +2,7 @@
 // const mysql = require('mssql');
 var  config = require('./dbconfig');
 var sql = require('mssql');
-// var connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : '123456789'
-//  // port:'3306'
-// });
+
 
 
 

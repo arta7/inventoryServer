@@ -33,10 +33,10 @@ router.use((request, response, next) => {
   router.route('/GetUnits').post((request, response) => {
     Db.GetUnits(request, response).then((data) => {
       
-      console.log('response',response,'data : ',data)
+      console.log('data : ',data)
     }).catch((error)=>{
         console.log('response2 : ',error)
-        response.send({"error": error});
+       // response.send({"error": error});
     })
   })
 
