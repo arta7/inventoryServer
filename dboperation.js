@@ -1,7 +1,7 @@
 //var  config = require('./dbconfig');
 // const mysql = require('mssql');
 var  config = require('./dbconfig');
-var sql = require('mssql');
+var sql = require('mssql/msnodesqlv8');
 
 
 

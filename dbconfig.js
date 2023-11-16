@@ -5,8 +5,7 @@ const  config = {
     database:  'ToolsApp',
     port:30224,
     options: {
-      encrypt: true,
-      trustServerCertificate: false
+      trustedConnection:true
   }
    
     // host     : 'esme.iran.liara.ir',
