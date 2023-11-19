@@ -192,7 +192,7 @@ router.use((request, response, next) => {
 
 
   router.route('/AddParts').post((order,request, response) => {
-    Db.AddGroups(order,request, response).then((data) => {
+    Db.AddParts(order,request, response).then((data) => {
       
       console.log('response',response,'data1 : ',data)
     }).catch((error)=>{
@@ -275,6 +275,16 @@ router.use((request, response, next) => {
 
   router.route('/AddUsers').post((order,request, response) => {
     Db.AddUsers(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
+  router.route('/ResetPassword').post((order,request, response) => {
+    Db.ResetPassword(order,request, response).then((data) => {
       
       console.log('response',response,'data1 : ',data)
     }).catch((error)=>{

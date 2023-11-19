@@ -1,7 +1,7 @@
 //var  config = require('./dbconfig');
 // const mysql = require('mssql');
 var  config = require('./dbconfig');
-var sql = require('mssql/msnodesqlv8');
+var sql = require('mssql');
 
 
 
@@ -246,6 +246,7 @@ async function AddParts(res,response){
     request.input('Title', order.body.Title);
     request.input('Code', order.body.Code);
     request.input('Id', order.body.Id);
+    request.input('Active', order.body.Active);
     request.execute('AddParts').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
       response.send({ 'data': 'Success'})
@@ -397,6 +398,24 @@ async function AddUsers(res,response){
     request.input('PostRef', order.body.PostRef);
     request.input('Active', order.body.Active);
     request.execute('AddUsers').then(function(data, recordsets, returnValue, affected) {
+      console.log( 'data ', data.recordset);
+      response.send({ 'data': 'Success'})
+     }).catch(function(err) {
+       response.send({ 'data ': 'Error'})
+       console.log(err,'Error ');
+     });
+  });
+
+}
+
+async function ResetPassword(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Username', order.body.Username);
+    request.input('Password', order.body.Password);
+    request.execute('ResetPassword').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
       response.send({ 'data': 'Success'})
      }).catch(function(err) {
@@ -664,7 +683,8 @@ async function DeleteUsersWithUsername(res,response){
     DeleteStates:DeleteStates,
     DeleteUnits:DeleteUnits,
     DeleteUsersAccessParts:DeleteUsersAccessParts,
-    DeleteUsersWithUsername:DeleteUsersWithUsername
+    DeleteUsersWithUsername:DeleteUsersWithUsername,
+    ResetPassword:ResetPassword
 
 
   }
