@@ -182,6 +182,23 @@ async function GetUsersAccessParts(res,response){
   });
 
 }
+
+async function GetPostsAccessParts(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('PostRef', order.body.PostRef);
+    request.execute('GetPostsAccessParts').then(function(data, recordsets, returnValue, affected) {
+     console.log( 'data ', data.recordset);
+     response.send({ 'data': data.recordset})
+    }).catch(function(err) {
+     // response.send({ 'data ': err})
+      console.log(err,'Error ');
+    });
+  });
+
+}
 async function GetUsersWithUsername(res,response){
   let  order = { ...res }
   var conn = new sql.ConnectionPool(config);
@@ -684,7 +701,8 @@ async function DeleteUsersWithUsername(res,response){
     DeleteUnits:DeleteUnits,
     DeleteUsersAccessParts:DeleteUsersAccessParts,
     DeleteUsersWithUsername:DeleteUsersWithUsername,
-    ResetPassword:ResetPassword
+    ResetPassword:ResetPassword,
+    GetPostsAccessParts:GetPostsAccessParts
 
 
   }

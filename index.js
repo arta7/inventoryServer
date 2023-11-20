@@ -149,6 +149,16 @@ router.use((request, response, next) => {
 
 
 
+  router.route('/GetPostsAccessParts').post((order,request, response) => {
+    Db.GetPostsAccessParts(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
   router.route('/GetUsersAccessParts').post((order,request, response) => {
     Db.GetUsersAccessParts(order,request, response).then((data) => {
       
