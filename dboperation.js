@@ -353,9 +353,10 @@ async function AddGroupOfSets(res,response){
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
-    request.input('GroupRef', order.body.GroupRef);
-    request.input('SetsRef', order.body.SetsRef);
-    request.input('Count', order.body.Count);
+    // request.input('GroupRef', order.body.GroupRef);
+    // request.input('SetsRef', order.body.SetsRef);
+    // request.input('Count', order.body.Count);
+    request.input('jsonData', order.body.jsonData);
     request.execute('AddGroupOfSets').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
       response.send({ 'data': 'Success'})
@@ -391,9 +392,9 @@ async function AddSetsOfProduct(res,response){
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
-    request.input('ProductRef', order.body.ProductRef);
-    request.input('SetsRef', order.body.SetsRef);
-    request.input('Counts', order.body.Counts);
+    // request.input('ProductRef', order.body.ProductRef);
+    // request.input('SetsRef', order.body.SetsRef);
+    request.input('jsonData', order.body.jsonData);
     request.execute('AddSetsOfProduct').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
       response.send({ 'data': 'Success'})
@@ -447,12 +448,12 @@ async function AddUsersAccessParts(res,response){
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
-    request.input('serRef', order.body.serRef);
-    request.input('PartRef', order.body.PartRef);
-    request.input('TypeAccess', order.body.TypeAccess);
+    request.input('jsonData', order.body.jsonData);
+    // request.input('PartRef', order.body.PartRef);
+    // request.input('TypeAccess', order.body.TypeAccess);
     request.execute('AddUsersAccessParts').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
-      response.send({ 'data': 'Success'})
+      response.send({ 'data': data})
      }).catch(function(err) {
        response.send({ 'data ': 'Error'})
        console.log(err,'Error ');
@@ -629,7 +630,7 @@ async function DeleteUsersAccessParts(res,response){
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
-    request.input('UserRef', order.body.UserRef);
+    request.input('PostRef', order.body.PostRef);
     request.execute('DeleteUsersAccessParts').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
       response.send({ 'data': 'Success'})
