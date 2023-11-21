@@ -397,7 +397,7 @@ async function AddSetsOfProduct(res,response){
     request.input('jsonData', order.body.jsonData);
     request.execute('AddSetsOfProduct').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
-      response.send({ 'data': 'Success'})
+      response.send({ 'data': data})
      }).catch(function(err) {
        response.send({ 'data ': 'Error'})
        console.log(err,'Error ');
