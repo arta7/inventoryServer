@@ -61,8 +61,8 @@ router.use((request, response, next) => {
     })
   })
 
-  router.route('/GetGroupOfSets').post((request, response) => {
-    Db.GetGroupOfSets(request, response).then((data) => {
+  router.route('/GetGroupOfSets').post((order,request, response) => {
+    Db.GetGroupOfSets(order,request, response).then((data) => {
       
       console.log('response',response,'data : ',data)
     }).catch((error)=>{

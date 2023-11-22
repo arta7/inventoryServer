@@ -54,10 +54,11 @@ async function GetFiscalYears(res,response){
 
 }
 async function GetGroupOfSets(res,response){
-
+  let  order = { ...res }
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
+    request.input('GroupRef', order.body.GroupRef);
     request.execute('GetGroupOfSets').then(function(data, recordsets, returnValue, affected) {
       response.send({ 'data': data.recordset})
      console.log( 'data : ', data.recordset);
