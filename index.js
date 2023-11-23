@@ -41,6 +41,28 @@ router.use((request, response, next) => {
   })
 
 
+
+  router.route('/GetProductsDocuments').post((request, response) => {
+    Db.GetProductsDocuments(request, response).then((data) => {
+      
+      console.log('data : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+       // response.send({"error": error});
+    })
+  })
+
+  router.route('/GetSetsDocuments').post((request, response) => {
+    Db.GetSetsDocuments(request, response).then((data) => {
+      
+      console.log('data : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+       // response.send({"error": error});
+    })
+  })
+
+
   router.route('/GetAllUsers').post((request, response) => {
     Db.GetAllUsers(request, response).then((data) => {
       
@@ -189,6 +211,28 @@ router.use((request, response, next) => {
          response.send({"error": error});
     })
   })
+
+  router.route('/AddProductDocuments').post((order,request, response) => {
+    Db.AddProductDocuments(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
+  router.route('/AddSetsDocuments').post((order,request, response) => {
+    Db.AddSetsDocuments(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
+
 
   router.route('/AddGroups').post((order,request, response) => {
     Db.AddGroups(order,request, response).then((data) => {

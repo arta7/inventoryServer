@@ -82,6 +82,39 @@ async function GetGroups(res,response){
   });
 
 }
+
+
+async function GetProductsDocuments(res,response){
+
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.execute('GetProductsDocuments').then(function(data, recordsets, returnValue, affected) {
+      response.send({ 'data': data.recordset})
+     console.log( 'data : ', data.recordset);
+    }).catch(function(err) {
+      console.log(err,'Error test');
+    });
+  });
+
+}
+
+async function GetSetsDocuments(res,response){
+
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.execute('GetSetsDocuments').then(function(data, recordsets, returnValue, affected) {
+      response.send({ 'data': data.recordset})
+     console.log( 'data : ', data.recordset);
+    }).catch(function(err) {
+      console.log(err,'Error test');
+    });
+  });
+
+}
+
+
 async function GetParts(res,response){
 
   var conn = new sql.ConnectionPool(config);
@@ -354,9 +387,6 @@ async function AddGroupOfSets(res,response){
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
-    // request.input('GroupRef', order.body.GroupRef);
-    // request.input('SetsRef', order.body.SetsRef);
-    // request.input('Count', order.body.Count);
     request.input('jsonData', order.body.jsonData);
     request.execute('AddGroupOfSets').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
@@ -368,6 +398,44 @@ async function AddGroupOfSets(res,response){
   });
 
 }
+
+
+async function AddSetsDocuments(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('jsonData', order.body.jsonData);
+    request.execute('AddSetsDocuments').then(function(data, recordsets, returnValue, affected) {
+      console.log( 'data ', data.recordset);
+      response.send({ 'data': 'Success'})
+     }).catch(function(err) {
+       response.send({ 'data ': 'Error'})
+       console.log(err,'Error ');
+     });
+  });
+
+}
+
+
+async function AddProductDocuments(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('jsonData', order.body.jsonData);
+    request.execute('AddProductDocuments').then(function(data, recordsets, returnValue, affected) {
+      console.log( 'data ', data.recordset);
+      response.send({ 'data': 'Success'})
+     }).catch(function(err) {
+       response.send({ 'data ': 'Error'})
+       console.log(err,'Error ');
+     });
+  });
+
+}
+
+
 async function AddProducts(res,response){
   let  order = { ...res }
   var conn = new sql.ConnectionPool(config);
@@ -704,7 +772,11 @@ async function DeleteUsersWithUsername(res,response){
     DeleteUsersAccessParts:DeleteUsersAccessParts,
     DeleteUsersWithUsername:DeleteUsersWithUsername,
     ResetPassword:ResetPassword,
-    GetPostsAccessParts:GetPostsAccessParts
+    GetPostsAccessParts:GetPostsAccessParts,
+    AddProductDocuments:AddProductDocuments,
+    AddSetsDocuments:AddSetsDocuments,
+    GetSetsDocuments:GetSetsDocuments,
+    GetProductsDocuments:GetProductsDocuments
 
 
   }
