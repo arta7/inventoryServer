@@ -250,6 +250,24 @@ async function GetUsersWithUsername(res,response){
 
 }
 
+async function GetUsersWithUsernameandPass(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Username', order.body.Username);
+    request.input('PassWord', order.body.PassWord);
+    request.execute('GetUsersWithUsernameandPass').then(function(data, recordsets, returnValue, affected) {
+     console.log( 'data ', data.recordset);
+     response.send({ 'data': data.recordset})
+    }).catch(function(err) {
+     // response.send({ 'data ': err})
+      console.log(err,'Error ');
+    });
+  });
+
+}
+
 //Insert and Update 
 
 
@@ -409,6 +427,32 @@ async function AddSetsDocuments(res,response){
     request.execute('AddSetsDocuments').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
       response.send({ 'data': 'Success'})
+     }).catch(function(err) {
+       response.send({ 'data ': 'Error'})
+       console.log(err,'Error ');
+     });
+  });
+
+}
+
+
+async function AddDocumentControls(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Code', order.body.Code);
+    request.input('Type', order.body.Type);
+    request.input('UserRef', order.body.UserRef);
+    request.input('SecondUserRef', order.body.SecondUserRef);
+    request.input('StatesRef', order.body.StatesRef);
+    request.input('CurrentState', order.body.CurrentState);
+    request.input('RegisterDate', order.body.RegisterDate);
+    request.input('Date', order.body.Date);
+    request.input('FiscalYearRef', order.body.FiscalYearRef);
+    request.execute('AddDocumentControls').then(function(data, recordsets, returnValue, affected) {
+      console.log( 'data ', data.recordset);
+      response.send({ 'data': data.recordset})
      }).catch(function(err) {
        response.send({ 'data ': 'Error'})
        console.log(err,'Error ');
@@ -776,7 +820,9 @@ async function DeleteUsersWithUsername(res,response){
     AddProductDocuments:AddProductDocuments,
     AddSetsDocuments:AddSetsDocuments,
     GetSetsDocuments:GetSetsDocuments,
-    GetProductsDocuments:GetProductsDocuments
+    GetProductsDocuments:GetProductsDocuments,
+    AddDocumentControls:AddDocumentControls,
+    GetUsersWithUsernameandPass:GetUsersWithUsernameandPass
 
 
   }

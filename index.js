@@ -192,7 +192,17 @@ router.use((request, response, next) => {
   })
 
   router.route('/GetUsersWithUsername').post((order,request, response) => {
-    Db.GetUsersAccessParts(order,request, response).then((data) => {
+    Db.GetUsersWithUsername(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
+  router.route('/GetUsersWithUsernameandPass').post((order,request, response) => {
+    Db.GetUsersWithUsernameandPass(order,request, response).then((data) => {
       
       console.log('response',response,'data1 : ',data)
     }).catch((error)=>{
@@ -288,6 +298,16 @@ router.use((request, response, next) => {
 
   router.route('/AddUnits').post((order,request, response) => {
     Db.AddUnits(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
+  router.route('/AddDocumentControls').post((order,request, response) => {
+    Db.AddDocumentControls(order,request, response).then((data) => {
       
       console.log('response',response,'data1 : ',data)
     }).catch((error)=>{
