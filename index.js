@@ -42,8 +42,8 @@ router.use((request, response, next) => {
 
 
 
-  router.route('/GetProductsDocuments').post((request, response) => {
-    Db.GetProductsDocuments(request, response).then((data) => {
+  router.route('/GetProductsDocuments').post((order,request, response) => {
+    Db.GetProductsDocuments(order,request, response).then((data) => {
       
       console.log('data : ',data)
     }).catch((error)=>{
@@ -52,8 +52,8 @@ router.use((request, response, next) => {
     })
   })
 
-  router.route('/GetSetsDocuments').post((request, response) => {
-    Db.GetSetsDocuments(request, response).then((data) => {
+  router.route('/GetSetsDocuments').post((order,request, response) => {
+    Db.GetSetsDocuments(order,request, response).then((data) => {
       
       console.log('data : ',data)
     }).catch((error)=>{

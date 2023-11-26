@@ -85,10 +85,11 @@ async function GetGroups(res,response){
 
 
 async function GetProductsDocuments(res,response){
-
+  let  order = { ...res }
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
+    request.input('FiscalYearRef', order.body.FiscalYearRef);
     request.execute('GetProductsDocuments').then(function(data, recordsets, returnValue, affected) {
       response.send({ 'data': data.recordset})
      console.log( 'data : ', data.recordset);
@@ -100,10 +101,11 @@ async function GetProductsDocuments(res,response){
 }
 
 async function GetSetsDocuments(res,response){
-
+  let  order = { ...res }
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
+    request.input('FiscalYearRef', order.body.FiscalYearRef);
     request.execute('GetSetsDocuments').then(function(data, recordsets, returnValue, affected) {
       response.send({ 'data': data.recordset})
      console.log( 'data : ', data.recordset);
@@ -262,7 +264,7 @@ async function GetUsersWithUsernameandPass(res,response){
      response.send({ 'data': data.recordset})
     }).catch(function(err) {
      // response.send({ 'data ': err})
-      console.log(err,'Error ');
+      console.log('Error ',err);
     });
   });
 
