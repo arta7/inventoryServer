@@ -73,6 +73,16 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/GetKardexSets').post((order,request, response) => {
+    Db.GetKardexSets(order,request, response).then((data) => {
+      
+      console.log('data : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+       // response.send({"error": error});
+    })
+  })
+
 
   router.route('/GetAllUsers').post((request, response) => {
     Db.GetAllUsers(request, response).then((data) => {
