@@ -52,6 +52,37 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/GetProductsDocumentsWithId').post((order,request, response) => {
+    Db.GetProductsDocumentsWithId(order,request, response).then((data) => {
+      
+      console.log('data : ',data)
+    }).catch((error)=>{
+        console.log('response GetProductsDocumentsWithId : ',error)
+       // response.send({"error": error});
+    })
+  })
+
+  router.route('/GetSetsDocuments').post((order,request, response) => {
+    Db.GetSetsDocuments(order,request, response).then((data) => {
+      
+      console.log('data : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+       // response.send({"error": error});
+    })
+  })
+
+  router.route('/GetProductDocumentData').post((order,request, response) => {
+    Db.GetProductDocumentData(order,request, response).then((data) => {
+      
+      console.log('data : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+       // response.send({"error": error});
+    })
+  })
+
+
   router.route('/GetSetsDocuments').post((order,request, response) => {
     Db.GetSetsDocuments(order,request, response).then((data) => {
       

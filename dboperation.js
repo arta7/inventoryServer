@@ -100,6 +100,42 @@ async function GetProductsDocuments(res,response){
 
 }
 
+
+async function GetProductsDocumentsWithId(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Id', order.body.Id);
+    request.input('FiscalYearRef', order.body.FiscalYearRef);
+    request.execute('GetProductsDocumentsWithId').then(function(data, recordsets, returnValue, affected) {
+      response.send({ 'data': data.recordset})
+     console.log( 'data : ', data.recordset);
+    }).catch(function(err) {
+      response.send({ ' err data': err})
+      console.log('Error test GetProductsDocumentsWithId : ',err);
+    });
+  });
+
+}
+
+async function GetSetsDocuments(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('FiscalYearRef', order.body.FiscalYearRef);
+    request.execute('GetSetsDocuments').then(function(data, recordsets, returnValue, affected) {
+      response.send({ 'data': data.recordset})
+     console.log( 'data : ', data.recordset);
+    }).catch(function(err) {
+      console.log(err,'Error test');
+    });
+  });
+
+}
+
+
 async function GetSetsDocuments(res,response){
   let  order = { ...res }
   var conn = new sql.ConnectionPool(config);
@@ -867,7 +903,8 @@ async function DeleteUsersWithUsername(res,response){
     AddDocumentControls:AddDocumentControls,
     GetUsersWithUsernameandPass:GetUsersWithUsernameandPass,
     GetKardex:GetKardex,
-    GetKardexSets:GetKardexSets
+    GetKardexSets:GetKardexSets,
+    GetProductsDocumentsWithId:GetProductsDocumentsWithId
 
 
   }
