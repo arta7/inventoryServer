@@ -129,7 +129,7 @@ async function GetSetsDocuments(res,response){
       response.send({ 'data': data.recordset})
      console.log( 'data : ', data.recordset);
     }).catch(function(err) {
-      console.log(err,'Error test');
+      console.log('Error test',err);
     });
   });
 
@@ -141,13 +141,14 @@ async function GetProductDocumentData(res,response){
   var conn = new sql.ConnectionPool(config);
   conn.connect().then(function(conn) {
     var request = new sql.Request(conn);
+    
     request.input('DocumentsRef', order.body.DocumentsRef);
     request.execute('GetProductDocumentData').then(function(data, recordsets, returnValue, affected) {
       response.send({ 'data': data.recordset})
      console.log( 'data : ', data.recordset);
     }).catch(function(err) {
       response.send({ ' err data': err})
-      console.log(err,'Error test');
+      console.log('Error test',err);
     });
   });
 
@@ -165,7 +166,7 @@ async function GetSetsDocumentData(res,response){
      console.log( 'data : ', data.recordset);
     }).catch(function(err) {
       response.send({ ' err data': err})
-      console.log(err,'Error test');
+      console.log('Error test',err);
     });
   });
 
