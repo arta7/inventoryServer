@@ -83,8 +83,8 @@ router.use((request, response, next) => {
   })
 
 
-  router.route('/GetSetsDocuments').post((order,request, response) => {
-    Db.GetSetsDocuments(order,request, response).then((data) => {
+  router.route('/GetSetsDocumentData').post((order,request, response) => {
+    Db.GetSetsDocumentData(order,request, response).then((data) => {
       
       console.log('data : ',data)
     }).catch((error)=>{
