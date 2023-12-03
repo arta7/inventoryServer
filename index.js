@@ -62,6 +62,16 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/GetSetsDocumentsWithId').post((order,request, response) => {
+    Db.GetSetsDocumentsWithId(order,request, response).then((data) => {
+      
+      console.log('data : ',data)
+    }).catch((error)=>{
+        console.log('response GetSetsDocumentsWithId : ',error)
+       // response.send({"error": error});
+    })
+  })
+
   router.route('/GetSetsDocuments').post((order,request, response) => {
     Db.GetSetsDocuments(order,request, response).then((data) => {
       
@@ -368,6 +378,16 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/UpdateDocumentControls').post((order,request, response) => {
+    Db.UpdateDocumentControls(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
   router.route('/AddGroupOfSets').post((order,request, response) => {
     Db.AddGroupOfSets(order,request, response).then((data) => {
       
@@ -440,6 +460,28 @@ router.use((request, response, next) => {
          response.send({"error": error});
     })
   })
+
+
+  router.route('/DeleteDocumentControlsSets').post((order,request, response) => {
+    Db.DeleteDocumentControlsSets(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
+  router.route('/DeleteDocumentControlsProduct').post((order,request, response) => {
+    Db.DeleteDocumentControlsProduct(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
 
   router.route('/DeleteGroupOfSets').post((order,request, response) => {
     Db.DeleteGroupOfSets(order,request, response).then((data) => {

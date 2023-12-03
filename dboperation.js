@@ -119,6 +119,24 @@ async function GetProductsDocumentsWithId(res,response){
 
 }
 
+async function GetSetsDocumentsWithId(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Id', order.body.Id);
+    request.input('FiscalYearRef', order.body.FiscalYearRef);
+    request.execute('GetSetsDocumentsWithId').then(function(data, recordsets, returnValue, affected) {
+      response.send({ 'data': data.recordset})
+     console.log( 'data : ', data.recordset);
+    }).catch(function(err) {
+      response.send({ ' err data': err})
+      console.log('Error test GetSetsDocumentsWithId : ',err);
+    });
+  });
+
+}
+
 async function GetSetsDocuments(res,response){
   let  order = { ...res }
   var conn = new sql.ConnectionPool(config);
@@ -560,6 +578,31 @@ async function AddDocumentControls(res,response){
 
 }
 
+async function UpdateDocumentControls(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Code', order.body.Code);
+    request.input('Type', order.body.Type);
+    request.input('UserRef', order.body.UserRef);
+    request.input('SecondUserRef', order.body.SecondUserRef);
+    request.input('StatesRef', order.body.StatesRef);
+    request.input('CurrentState', order.body.CurrentState);
+    request.input('RegisterDate', order.body.RegisterDate);
+    request.input('Date', order.body.Date);
+    request.input('FiscalYearRef', order.body.FiscalYearRef);
+    request.execute('AddDocumentControls').then(function(data, recordsets, returnValue, affected) {
+      console.log( 'data ', data.recordset);
+      response.send({ 'data': data.recordset})
+     }).catch(function(err) {
+       response.send({ 'data ': 'Error'})
+       console.log(err,'Error ');
+     });
+  });
+
+}
+
 
 async function AddProductDocuments(res,response){
   let  order = { ...res }
@@ -925,6 +968,7 @@ async function DeleteUsersWithUsername(res,response){
     GetKardex:GetKardex,
     GetKardexSets:GetKardexSets,
     GetProductsDocumentsWithId:GetProductsDocumentsWithId,
+    GetSetsDocumentsWithId:GetSetsDocumentsWithId,
     GetSetsDocumentData:GetSetsDocumentData,
     GetProductDocumentData:GetProductDocumentData
 
