@@ -592,12 +592,13 @@ async function UpdateDocumentControls(res,response){
     request.input('RegisterDate', order.body.RegisterDate);
     request.input('Date', order.body.Date);
     request.input('FiscalYearRef', order.body.FiscalYearRef);
-    request.execute('AddDocumentControls').then(function(data, recordsets, returnValue, affected) {
+    request.input('Id', order.body.Id);
+    request.execute('UpdateDocumentControls').then(function(data, recordsets, returnValue, affected) {
       console.log( 'data ', data.recordset);
       response.send({ 'data': data.recordset})
      }).catch(function(err) {
-       response.send({ 'data ': 'Error'})
-       console.log(err,'Error ');
+       response.send({ 'data ': err})
+       console.log('Error ',err);
      });
   });
 
@@ -913,6 +914,41 @@ async function DeleteUsersWithUsername(res,response){
 
 }
 
+async function DeleteDocumentControlsSets(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Id', order.body.Id);
+    request.execute('DeleteDocumentControlsSets').then(function(data, recordsets, returnValue, affected) {
+      console.log( 'data ', data.recordset);
+      response.send({ 'data': 'Success'})
+     }).catch(function(err) {
+       response.send({ 'data ': 'Error'})
+       console.log(err,'Error ');
+     });
+  });
+
+}
+
+
+async function DeleteDocumentControlsProduct(res,response){
+  let  order = { ...res }
+  var conn = new sql.ConnectionPool(config);
+  conn.connect().then(function(conn) {
+    var request = new sql.Request(conn);
+    request.input('Id', order.body.Id);
+    request.execute('DeleteDocumentControlsProduct').then(function(data, recordsets, returnValue, affected) {
+      console.log( 'data ', data.recordset);
+      response.send({ 'data': 'Success'})
+     }).catch(function(err) {
+       response.send({ 'data ': 'Error'})
+       console.log(err,'Error ');
+     });
+  });
+
+}
+
 
 
 
@@ -970,7 +1006,10 @@ async function DeleteUsersWithUsername(res,response){
     GetProductsDocumentsWithId:GetProductsDocumentsWithId,
     GetSetsDocumentsWithId:GetSetsDocumentsWithId,
     GetSetsDocumentData:GetSetsDocumentData,
-    GetProductDocumentData:GetProductDocumentData
+    GetProductDocumentData:GetProductDocumentData,
+    UpdateDocumentControls:UpdateDocumentControls,
+    DeleteDocumentControlsSets:DeleteDocumentControlsSets,
+    DeleteDocumentControlsProduct:DeleteDocumentControlsProduct
 
 
 
