@@ -1381,7 +1381,7 @@ async function AddStates(res,response){
     if (err) throw err;
     console.log("Connected!");
   })
-  pool.query("call AddStates(?,?,?,?)",[Title,Code,StateType,Id], function (err, result) {
+  pool.query("call AddStates(?,?,?,?)",[Title,Code,Id,StateType], function (err, result) {
     if (err) throw err;
     if(result.length > 0)
     {
@@ -1600,7 +1600,7 @@ async function AddDocumentControls(res,response){
     console.log("Connected!");
   })
   pool.query("call AddDocumentControls(?,?,?,?,?,?,?,?,?)",
-  [Code,Type,UserRef,SecondUserRef,StatesRef,CurrentState,RegisterDate,Date,FiscalYearRef], function (err, result) {
+  [Code,Type,UserRef,SecondUserRef,FiscalYearRef,StatesRef,CurrentState,RegisterDate,Date], function (err, result) {
     if (err) throw err;
     if(result.length > 0)
     {
@@ -1668,7 +1668,7 @@ async function UpdateDocumentControls(res,response){
     console.log("Connected!");
   })
   pool.query("call UpdateDocumentControls(?,?,?,?,?,?,?,?,?,?)",
-  [Code,Type,UserRef,SecondUserRef,StatesRef,CurrentState,RegisterDate,Date,FiscalYearRef,Id], function (err, result) {
+  [Code,Type,UserRef,SecondUserRef,FiscalYearRef,StatesRef,CurrentState,RegisterDate,Date,Id], function (err, result) {
     if (err) throw err;
     if(result.length > 0)
     {
