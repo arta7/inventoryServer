@@ -1873,16 +1873,16 @@ async function AddUsers(res,response){
      console.log('order.body  : ',order.body)
      var Username = order.body.Username ;
      var Password = order.body.Password ;
-     var Id = order.body.Id ;
      var PostRef = order.body.PostRef ;
      var Active = order.body.Active ;
+     var Id = order.body.Id ;
      console.log('pool : ',pool)
   pool.connect(async function(err) {
     
     if (err) throw err;
     console.log("Connected!");
   })
-  pool.query("call AddUsers(?,?,?,?,?)",[Username,Password,Id,PostRef,Active], function (err, result) {
+  pool.query("call AddUsers(?,?,?,?,?)",[Username,Password,PostRef,Active,Id], function (err, result) {
     if (err) throw err;
     if(result.length > 0)
     {
@@ -2640,6 +2640,43 @@ catch (error) {
 
 }
 
+async function DeleteDocumentControls(res,response){
+
+
+  let  order = { ...res }
+  try {
+    let  pool = await  mysql.createConnection(config);
+     console.log('order.body  : ',order.body)
+     var Id = order.body.Id ;
+     console.log('pool : ',pool)
+  pool.connect(async function(err) {
+    
+    if (err) throw err;
+    console.log("Connected!");
+  })
+  pool.query("call DeleteDocumentControls(?)",Id, function (err, result) {
+    if (err) throw err;
+    if(result.length > 0)
+    {
+      console.log('data :',result)
+      response.send({ 'data': result[0]})
+    }
+    else
+    {
+      console.log('data :',[])
+      response.send({ 'data': []})
+    }
+     
+});
+}
+catch (error) {
+  response.send({ 'data': '500'})
+  console.log('error get',error);
+  return false;
+}
+
+}
+
 
 async function DeleteDocumentControlsProduct(res,response){
   // let  order = { ...res }
@@ -2750,7 +2787,8 @@ catch (error) {
     GetProductDocumentData:GetProductDocumentData,
     UpdateDocumentControls:UpdateDocumentControls,
     DeleteDocumentControlsSets:DeleteDocumentControlsSets,
-    DeleteDocumentControlsProduct:DeleteDocumentControlsProduct
+    DeleteDocumentControlsProduct:DeleteDocumentControlsProduct,
+    DeleteDocumentControls:DeleteDocumentControls
 
 
 

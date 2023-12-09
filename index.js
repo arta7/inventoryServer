@@ -472,6 +472,16 @@ router.use((request, response, next) => {
     })
   })
 
+  router.route('/DeleteDocumentControls').post((order,request, response) => {
+    Db.DeleteDocumentControls(order,request, response).then((data) => {
+      
+      console.log('response',response,'data1 : ',data)
+    }).catch((error)=>{
+        console.log('response2 : ',error)
+         response.send({"error": error});
+    })
+  })
+
   router.route('/DeleteDocumentControlsProduct').post((order,request, response) => {
     Db.DeleteDocumentControlsProduct(order,request, response).then((data) => {
       
